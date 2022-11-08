@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <title>Pokedex-Studi</title>
+    <title>Pokedex-Studi - Créer un Pokemon</title>
 </head>
 
 <body>
@@ -43,24 +43,28 @@
     require './PokemonsManager.php';
 
     $manager = new PokemonsManager();
-    $pokemons = $manager->getAll();
 
     ?>
 
     <main class="container">
-        <section class=" d-flex flex-wrap justify-content-center">
-            <?php foreach ($pokemons as $pokemon) : ?>
-                <div class="card m-5" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="<?= $pokemon->getName(); ?>">
-                    <div class="card-body">
-                        <h5 class="card-title"><?= $pokemon->getName(); ?></h5>
-                        <p class="card-text"><?= $pokemon->getDescription(); ?></p>
-                        <a href="#" class="btn btn-warning">Modifier</a>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </section>
-        <a href="./create.php" class="btn btn-success">Ajouter un Pokémon</a>
+        <form method="post" enctype="multipart/form-data">
+            <label for="number" class="form-label">Numéro</label>
+            <input type="number" name="number" placeholder="Le numéro du Pokemon" id="number" class="form-control" min=1 max=901>
+            <label for="name" class="form-label">Nom du Pokemon</label>
+            <input type="name" name="name" placeholder="Le nom du Pokemon" id="name" class="form-control" minlength="3" maxlength="40">
+            <label for="description" class="" form-label>Description</label>
+            <textarea name="description" id="description" class="form-control" rows="6" placeholder="La description du Pokemon" minlength="10" maxlength="200"></textarea>
+            <label for="type1" class="form-label">Type</label>
+            <select name="type1" id="type1" class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+            <label for="image" class="form-label">Image</label>
+            <input type="file" name="image" id="image" class="form-control">
+            <input type="submit" class="btn btn-outline-success mt-3" value="Créer">
+        </form>
     </main>
 
 </body>
