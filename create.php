@@ -41,8 +41,27 @@
 
     <?php
     require './PokemonsManager.php';
+    require './TypesManager.php';
+    require './ImagesManager.php';
 
-    $manager = new PokemonsManager();
+    $pokemonmanager = new PokemonsManager();
+    $typeManager = new TypesManager();
+    $types = $typeManager->getAll();
+
+    if ($_POST) {
+        $number = $_POST['number'];
+        $name = $_POST['name'];
+        $description = $_POST['description'];
+        $type1 = $_POST['type1'];
+        $type2 = $_POST['type2'];
+        var_dump($_FILES);
+
+        if ($_FILES["image"]["size"] < 2000000) {
+            $ImagesManager = new ImagesManager();
+            
+        }
+
+    }
 
     ?>
 
@@ -54,13 +73,24 @@
             <input type="name" name="name" placeholder="Le nom du Pokemon" id="name" class="form-control" minlength="3" maxlength="40">
             <label for="description" class="" form-label>Description</label>
             <textarea name="description" id="description" class="form-control" rows="6" placeholder="La description du Pokemon" minlength="10" maxlength="200"></textarea>
-            <label for="type1" class="form-label">Type</label>
-            <select name="type1" id="type1" class="form-select" aria-label="Default select example">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+
+            <label for="type1" class="form-label">Type 1</label>
+            <select name="type1" id="type1" class="form-select">
+                <option value="" disabled selected hidden>-- Sélectionner un type --</option>
+                <?php foreach ($types as $type) : ?>
+                    <option value="<?= $type->getId(); ?>"><?= $type->getName(); ?></option>
+                <?php endforeach ?>
+
             </select>
+
+            <label for="type2" class="form-label">Type 2</label>
+            <select name="type2" id="type2" class="form-select">
+                <option value="">-- Sélectionner un type --</option>
+                <?php foreach ($types as $type) : ?>
+                    <option value="<?= $type->getId(); ?>"><?= $type->getName(); ?></option>
+                <?php endforeach ?>
+            </select>
+
             <label for="image" class="form-label">Image</label>
             <input type="file" name="image" id="image" class="form-control">
             <input type="submit" class="btn btn-outline-success mt-3" value="Créer">

@@ -8,6 +8,7 @@ class Pokemon
     private $description;
     private $type1;
     private $type2;
+    private $image;
 
 
     // CONSTRUCTOR ----------------------------------------------------
@@ -103,6 +104,19 @@ class Pokemon
     public function setType2($type2)
     {
         $this->type2 = $type2;
+
+        return $this;
+    }
+
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
 
         return $this;
     }
