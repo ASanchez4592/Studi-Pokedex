@@ -1,23 +1,17 @@
 <?php
 
-class Image
-{
+class Image {
     private $id;
     private $name;
     private $path;
 
-    // CONSTRUCTOR ----------------------------------------------------
-    public function __construct(array $data)
-    {
+    public function __construct(array $data) {
         $this->hydrate($data);
     }
 
-
-    // HYDRATATION ----------------------------------------------------
-    public function hydrate(array $data)
-    {
+    public function hydrate(array $data): void {
         foreach ($data as $key => $value) {
-            $method = "set" . ucfirst($key);
+            $method = "set" . ucfirst($key); // setId, setName, setPath
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
